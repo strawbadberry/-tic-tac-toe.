@@ -13,22 +13,30 @@ def make_empty_board():
 
 def get_winner(board):
     """Determines the winner of the given board.
-    Returns 'X', 'O', or None.""" 
+    Returns 'X', 'O', or None."""
+    for row in board:
+        if row[0] == row[1] == row[2] and row[0] is not None:
+            return row[0]
 
-    winner = None
+    for col in range(3):
+        if board[0][col] == board[1][col] == board[2][col] and board[0][col] is not None:
+            return board[0][col]
 
-    # Check rows, columns, and diagonals
-    for i in range(3):
-        if (board[i][0] == board[i][1] == board[i][2] or
-            board[0][i] == board[1][i] == board[2][i]):
-            winner = board[i][0]
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
+        return board[0][0]
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] is not None:
+        return board[0][2]
 
-    
+
 
 
 def other_player(player):
     """Given the character for a player, returns the other player."""
-    if player == "X":
-     return "0"
-    elif player == "0":
-     return "X"
+    if player == 'X':
+        return 'O'
+    elif player == 'O':
+        return 'X'
+    else:
+        raise ValueError("Invalid player character")
+    
+ 
